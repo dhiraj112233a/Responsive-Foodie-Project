@@ -293,7 +293,7 @@ function Cart({
                   </button>
 
                   <button className="download-bill-btn" onClick={downloadBill}>
-                    Download Bill
+                    Click to Download The Bill 👆
                   </button>
                 </div>
               </>
