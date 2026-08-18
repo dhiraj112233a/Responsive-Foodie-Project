@@ -1,7 +1,7 @@
 import { Link, NavLink } from "react-router-dom";
 import { useState } from "react";
 
-function Navbar() {
+function Navbar({ cartCount }) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
@@ -31,8 +31,13 @@ function Navbar() {
             Popular
           </a>
 
+          <NavLink to="/cart" className="cart-link" onClick={() => setMenuOpen(false)}>
+            🛒 Cart
+            {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
+          </NavLink>
+
           <NavLink to="/login" onClick={() => setMenuOpen(false)}>
-            Login
+            Login →
           </NavLink>
 
           <NavLink

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { FaInstagram, FaFacebook, FaTwitter } from "react-icons/fa";
 
-function Home() {
+function Home({ addToCart }) {
   const [selectedCategory, setSelectedCategory] = useState(null);
 
   const categories = [
@@ -409,7 +409,10 @@ function Home() {
 
                   <div className="food-bottom">
                     <strong>{item.price}</strong>
-                    <button>+ Add</button>
+                    <button onClick={() => addToCart(item)}>
+  + Add
+</button>
+
                   </div>
                 </div>
               </div>
@@ -441,7 +444,10 @@ function Home() {
 
                   <div className="food-bottom">
                     <strong>{food.price}</strong>
-                    <button>+ Add</button>
+                    <button onClick={() => addToCart(food)}>
+  + Add
+</button>
+
                   </div>
                 </div>
               </div>
