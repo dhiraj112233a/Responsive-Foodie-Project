@@ -410,8 +410,8 @@ function Home({ addToCart }) {
                   <div className="food-bottom">
                     <strong>{item.price}</strong>
                     <button onClick={() => addToCart(item)}>
-  + Add
-</button>
+                    + Add
+                    </button>
 
                   </div>
                 </div>
