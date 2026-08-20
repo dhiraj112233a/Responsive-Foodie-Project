@@ -8,7 +8,10 @@ const Categories = () => {
         <div className="page-header">
           <span>Explore Menu</span>
           <h1>Food Categories</h1>
-          <p>Find your favourite food by category.</p>
+          <p>Find your favourite food by category.</p><br></br>
+          <div className="welcome-food">
+        🍕 🍔 🍜 🍛 ☕ 🍰 🍸
+      </div>
         </div>
 
         <div className="category-grid">

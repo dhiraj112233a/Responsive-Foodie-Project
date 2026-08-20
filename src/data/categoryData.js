@@ -55,5 +55,5 @@ export const categories = [
     image: drinksImg,
     description: "Refreshing shakes and beverages",
     items: 7
-  }
+  },
 ];

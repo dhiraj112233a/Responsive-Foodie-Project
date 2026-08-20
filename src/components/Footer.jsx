@@ -3,47 +3,64 @@ import logo from "../assets/logo.png";
 
 const Footer = () => {
   return (
-    <footer className="footer">
-      <div className="container footer-grid">
-        <div>
-          <div className="footer-brand">
-            <img src={logo} alt="Foodie" />
-            <h2>Foodie</h2>
-          </div>
+     <footer className="footer">
+      <div className="footer-container">
+
+        {/* Brand / Description */}
+        <div className="footer-column footer-brand">
+          <h2>
+            <span className="footer-logo">🍴</span> Foodie
+          </h2>
+
           <p>
             Delicious food delivered fast, fresh and hot at your doorstep.
           </p>
         </div>
 
-        <div>
+        {/* Explore */}
+        <div className="footer-column">
           <h3>Explore</h3>
-          <Link to="/">Home</Link>
-          <Link to="/categories">Categories</Link>
-          <Link to="/restaurants">Restaurants</Link>
-          <Link to="/cart">Cart</Link>
+
+          <div className="footer-links">
+            <a href="/">Home</a>
+            <a href="/categories">Categories</a>
+            <a href="/restaurants">Restaurants</a>
+            <a href="/cart">Cart</a>
+          </div>
         </div>
 
-        <div>
+        {/* Company */}
+        <div className="footer-column">
           <h3>Company</h3>
-          <Link to="/about">About</Link>
-          <Link to="/contact">Contact</Link>
-          <Link to="/privacy-policy">Privacy Policy</Link>
-          <Link to="/terms-conditions">Terms Conditions</Link>
+
+          <div className="footer-links">
+            <a href="/about">About</a>
+            <a href="/contact">Contact</a>
+            <a href="/privacy-policy">Privacy Policy</a>
+            <a href="/terms">Terms & Conditions</a>
+          </div>
         </div>
 
-        <div>
+        {/* Contact */}
+        <div className="footer-column">
           <h3>Contact</h3>
-          <p>📍 New Delhi, India</p>
-          <p>📞 +91 98765 43210</p>
-          <p>✉ support@foodie.com</p>
+
+          <div className="contact-info">
+            <p>📍 Pune , India</p>
+            <p>📞 +91 70574 91939</p>
+            <p>✉️ support@foodie.com</p>
+          </div>
         </div>
+
       </div>
 
+      {/* Bottom Copyright */}
       <div className="footer-bottom">
-        © {new Date().getFullYear()} Foodie. All rights reserved.
+        <p>© 2026 Foodie. All rights reserved.</p>
       </div>
     </footer>
   );
 };
+
 
 export default Footer;
