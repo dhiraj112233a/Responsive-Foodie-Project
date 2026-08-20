@@ -1,3 +1,20 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap");
+
+:root {
+  --primary: #ff4d2d;
+  --primary-dark: #e73818;
+  --secondary: #111827;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --light: #fff7f3;
+  --white: #ffffff;
+  --border: #eeeeee;
+  --green: #18a558;
+  --red: #e11d48;
+  --shadow: 0 20px 60px rgba(17, 24, 39, 0.1);
+  --radius: 24px;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -9,15 +26,15 @@ html {
 }
 
 body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Inter", sans-serif;
+  color: var(--text);
   background: #ffffff;
-  color: #222;
-  overflow-x: hidden;
+  min-height: 100vh;
 }
 
-img {
-  max-width: 100%;
-  display: block;
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
 button,
@@ -27,11 +44,79 @@ select {
   font-family: inherit;
 }
 
-a {
-  color: inherit;
+button {
+  cursor: pointer;
 }
 
-::selection {
-  background: #ff6b35;
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.container {
+  width: min(1180px, calc(100% - 32px));
+  margin: auto;
+}
+
+.main-content {
+  min-height: 70vh;
+}
+
+.section {
+  padding: 80px 0;
+}
+
+.section-light {
+  background: linear-gradient(180deg, #fff7f3, #ffffff);
+}
+
+.page-section {
+  padding: 120px 0 80px;
+}
+
+.primary-btn,
+.secondary-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 13px 24px;
+  font-weight: 800;
+  border: none;
+  transition: 0.25s ease;
+  font-size: 15px;
+}
+
+.primary-btn {
+  background: linear-gradient(135deg, var(--primary), #ff8a3d);
   color: white;
+  box-shadow: 0 12px 30px rgba(255, 77, 45, 0.35);
+}
+
+.primary-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 40px rgba(255, 77, 45, 0.45);
+}
+
+.secondary-btn {
+  background: #fff;
+  color: var(--secondary);
+  border: 1px solid var(--border);
+}
+
+.secondary-btn:hover {
+  background: var(--secondary);
+  color: white;
+}
+
+.full {
+  width: 100%;
+}
+
+.card-box {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  box-shadow: var(--shadow);
 }

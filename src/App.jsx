@@ -1,90 +1,80 @@
 import { Routes, Route } from "react-router-dom";
-import { useEffect, useState } from "react";
-
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import ScrollToTop from "./components/ScrollToTop";
+import ProtectedRoute from "./components/ProtectedRoute";
+
 import Home from "./pages/Home";
+import Categories from "./pages/Categories";
+import CategoryMenu from "./pages/CategoryMenu";
+import Restaurants from "./pages/Restaurants";
+import RestaurantDetails from "./pages/RestaurantDetails";
+import Cart from "./pages/Cart";
+import Checkout from "./pages/Checkout";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Cart from "./pages/Cart";
-
-import "./App.css";
+import Profile from "./pages/Profile";
+import Orders from "./pages/Orders";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsConditions from "./pages/TermsConditions";
+import NotFound from "./pages/NotFound";
 
 function App() {
-  const [cartItems, setCartItems] = useState(() => {
-    const savedCart = localStorage.getItem("foodie-cart");
-    return savedCart ? JSON.parse(savedCart) : [];
-  });
-
-  useEffect(() => {
-    localStorage.setItem("foodie-cart", JSON.stringify(cartItems));
-  }, [cartItems]);
-
-  const addToCart = (foodItem) => {
-    setCartItems((prevItems) => {
-      const existingItem = prevItems.find((item) => item.name === foodItem.name);
-
-      if (existingItem) {
-        return prevItems.map((item) =>
-          item.name === foodItem.name
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
-        );
-      }
-
-      return [...prevItems, { ...foodItem, quantity: 1 }];
-    });
-  };
-
-  const increaseQuantity = (itemName) => {
-    setCartItems((prevItems) =>
-      prevItems.map((item) =>
-        item.name === itemName
-          ? { ...item, quantity: item.quantity + 1 }
-          : item
-      )
-    );
-  };
-
-  const decreaseQuantity = (itemName) => {
-    setCartItems((prevItems) =>
-      prevItems
-        .map((item) =>
-          item.name === itemName
-            ? { ...item, quantity: item.quantity - 1 }
-            : item
-        )
-        .filter((item) => item.quantity > 0)
-    );
-  };
-
-  const removeFromCart = (itemName) => {
-    setCartItems((prevItems) =>
-      prevItems.filter((item) => item.name !== itemName)
-    );
-  };
-
-  const cartCount = cartItems.reduce((total, item) => total + item.quantity, 0);
-
   return (
     <>
-      <Navbar cartCount={cartCount} />
+      <ScrollToTop />
+      <Navbar />
 
-      <Routes>
-        <Route path="/" element={<Home addToCart={addToCart} />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route
-          path="/cart"
-          element={
-            <Cart
-              cartItems={cartItems}
-              increaseQuantity={increaseQuantity}
-              decreaseQuantity={decreaseQuantity}
-              removeFromCart={removeFromCart}
-            />
-          }
-        />
-      </Routes>
+      <main className="main-content">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/categories" element={<Categories />} />
+          <Route path="/categories/:categoryId" element={<CategoryMenu />} />
+          <Route path="/restaurants" element={<Restaurants />} />
+          <Route path="/restaurants/:id" element={<RestaurantDetails />} />
+          <Route path="/cart" element={<Cart />} />
+
+          <Route
+            path="/checkout"
+            element={
+              <ProtectedRoute>
+                <Checkout />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/orders"
+            element={
+              <ProtectedRoute>
+                <Orders />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms-conditions" element={<TermsConditions />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </main>
+
+      <Footer />
     </>
   );
 }

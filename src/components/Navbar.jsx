@@ -1,56 +1,74 @@
-import { Link, NavLink } from "react-router-dom";
 import { useState } from "react";
+import { NavLink, Link } from "react-router-dom";
+import logo from "../assets/logo.png";
+import { useAuth } from "../context/AuthContext";
+import { useCart } from "../context/CartContext";
 
-function Navbar({ cartCount }) {
-  const [menuOpen, setMenuOpen] = useState(false);
+const Navbar = () => {
+  const [open, setOpen] = useState(false);
+  const { isAuthenticated, user, logout } = useAuth();
+  const { cartCount } = useCart();
+
+  const closeMenu = () => setOpen(false);
 
   return (
-    <nav className="navbar">
-      <div className="nav-container">
-        <Link to="/" className="logo" onClick={() => setMenuOpen(false)}>
-          🍔 Foodie
+    <header className="navbar">
+      <div className="container navbar-container">
+        <Link to="/" className="brand" onClick={closeMenu}>
+          <img src={logo} alt="Foodie" />
+          <span>Foodie</span>
         </Link>
 
-        <button
-          className="menu-toggle"
-          onClick={() => setMenuOpen(!menuOpen)}
-        >
-          {menuOpen ? "✖" : "☰"}
+        <button className="menu-btn" onClick={() => setOpen(!open)}>
+          {open ? "✕" : "☰"}
         </button>
 
-        <div className={`nav-links ${menuOpen ? "open" : ""}`}>
-          <NavLink to="/" onClick={() => setMenuOpen(false)}>
+        <nav className={`nav-links ${open ? "active" : ""}`}>
+          <NavLink to="/" onClick={closeMenu}>
             Home
           </NavLink>
-
-          <a href="/#categories" onClick={() => setMenuOpen(false)}>
+          <NavLink to="/categories" onClick={closeMenu}>
             Categories
-          </a>
+          </NavLink>
+          <NavLink to="/restaurants" onClick={closeMenu}>
+            Restaurants
+          </NavLink>
+          <NavLink to="/about" onClick={closeMenu}>
+            About
+          </NavLink>
+          <NavLink to="/contact" onClick={closeMenu}>
+            Contact
+          </NavLink>
 
-          <a href="/#popular" onClick={() => setMenuOpen(false)}>
-            Popular
-          </a>
-
-          <NavLink to="/cart" className="cart-link" onClick={() => setMenuOpen(false)}>
+          <NavLink to="/cart" className="cart-link" onClick={closeMenu}>
             🛒 Cart
             {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
           </NavLink>
 
-          <NavLink to="/login" onClick={() => setMenuOpen(false)}>
-            Login →
-          </NavLink>
-
-          <NavLink
-            to="/register"
-            className="register-btn"
-            onClick={() => setMenuOpen(false)}
-          >
-            Register
-          </NavLink>
-        </div>
+          {isAuthenticated ? (
+            <div className="nav-user">
+              <Link to="/profile" onClick={closeMenu}>
+                Hi, {user.name.split(" ")[0]}
+              </Link>
+              <button
+                onClick={() => {
+                  logout();
+                  closeMenu();
+                }}
+                className="logout-btn"
+              >
+                Logout
+              </button>
+            </div>
+          ) : (
+            <Link to="/login" className="nav-login" onClick={closeMenu}>
+              Login
+            </Link>
+          )}
+        </nav>
       </div>
-    </nav>
+    </header>
   );
-}
+};
 
 export default Navbar;

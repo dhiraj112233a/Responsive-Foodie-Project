@@ -1,165 +1,82 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import { isValidEmail, isValidPassword } from "../utils/validation";
 
-function Login() {
-
+const Login = () => {
   const navigate = useNavigate();
+  const { login } = useAuth();
 
-  const [formData, setFormData] = useState({
+  const [form, setForm] = useState({
     email: "",
-    password: "",
+    password: ""
   });
 
-  const [message, setMessage] = useState("");
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-  const handleChange = (event) => {
-
-    const { name, value } = event.target;
-
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-
-  };
-
-
-  const handleSubmit = (event) => {
-
-    event.preventDefault();
-
-    if (!formData.email || !formData.password) {
-
-      setMessage("Please fill in all fields.");
-
+    if (!isValidEmail(form.email)) {
+      alert("Please enter a valid email.");
       return;
     }
 
-    setMessage("Login successful! 🎉");
+    if (!isValidPassword(form.password)) {
+      alert("Password must be at least 6 characters.");
+      return;
+    }
 
-    setTimeout(() => {
-      navigate("/");
-    }, 1000);
+    const result = login(form);
 
+    if (!result.success) {
+      alert(result.message);
+      return;
+    }
+
+    navigate("/");
   };
 
-
   return (
+    <section className="auth-section">
+      <div className="auth-card">
+        <span>Welcome Back</span>
+        <h1>Login</h1>
 
-    <div className="auth-page">
+        <form onSubmit={handleSubmit}>
+          <label>Email</label>
+          <input
+            type="email"
+            placeholder="Enter email"
+            value={form.email}
+            onChange={(e) =>
+              setForm({
+                ...form,
+                email: e.target.value
+              })
+            }
+          />
 
-      <div className="auth-container">
+          <label>Password</label>
+          <input
+            type="password"
+            placeholder="Enter password"
+            value={form.password}
+            onChange={(e) =>
+              setForm({
+                ...form,
+                password: e.target.value
+              })
+            }
+          />
 
-        <div className="auth-left">
+          <button className="primary-btn full">Login</button>
+        </form>
 
-          <div className="auth-logo">
-            🍔
-          </div>
-
-          <h1>
-            Welcome back!
-          </h1>
-
-          <p>
-            Login to continue your delicious
-            journey with Foodie.
-          </p>
-
-          <div className="auth-food">
-            🍕 🍔 🍜 🍰
-          </div>
-
-        </div>
-
-
-        <div className="auth-form-container">
-
-          <h2>
-            Login
-          </h2>
-
-          <p className="form-subtitle">
-            Welcome back! Please enter your details.
-          </p>
-
-
-          {message && (
-            <div className="message">
-              {message}
-            </div>
-          )}
-
-
-          <form onSubmit={handleSubmit}>
-
-            <div className="input-group">
-
-              <label>
-                Email Address
-              </label>
-
-              <input
-                type="email"
-                name="email"
-                placeholder="Enter your email"
-                value={formData.email}
-                onChange={handleChange}
-              />
-
-            </div>
-
-
-            <div className="input-group">
-
-              <label>
-                Password
-              </label>
-
-              <input
-                type="password"
-                name="password"
-                placeholder="Enter your password"
-                value={formData.password}
-                onChange={handleChange}
-              />
-
-            </div>
-
-
-            <div className="forgot-password">
-              <a href="#">
-                Forgot Password?
-              </a>
-            </div>
-
-
-            <button
-              type="submit"
-              className="auth-btn"
-            >
-              Login
-            </button>
-
-          </form>
-
-
-          <p className="account-text">
-
-            Don't have an account?
-
-            <Link to="/register">
-              Create Account
-            </Link>
-
-          </p>
-
-        </div>
-
+        <p>
+          New to Foodie? <Link to="/register">Create account</Link>
+        </p>
       </div>
-
-    </div>
-
+    </section>
   );
-}
+};
 
 export default Login;

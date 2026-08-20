@@ -1,257 +1,105 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import {
+  isRequired,
+  isValidEmail,
+  isValidPassword
+} from "../utils/validation";
 
-function Register() {
-
+const Register = () => {
   const navigate = useNavigate();
+  const { register } = useAuth();
 
-  const [formData, setFormData] = useState({
+  const [form, setForm] = useState({
     name: "",
     email: "",
-    mobile: "",
-    password: "",
-    confirmPassword: "",
+    password: ""
   });
 
-  const [message, setMessage] = useState("");
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
+    if (!isRequired(form.name)) {
+      alert("Please enter your name.");
+      return;
+    }
 
-  const handleChange = (event) => {
+    if (!isValidEmail(form.email)) {
+      alert("Please enter a valid email.");
+      return;
+    }
 
-    const { name, value } = event.target;
+    if (!isValidPassword(form.password)) {
+      alert("Password must be at least 6 characters.");
+      return;
+    }
 
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+    const result = register(form);
 
+    if (!result.success) {
+      alert(result.message);
+      return;
+    }
+
+    navigate("/");
   };
-
-
-  const handleSubmit = (event) => {
-
-    event.preventDefault();
-
-
-    if (
-      !formData.name ||
-      !formData.email ||
-      !formData.mobile ||
-      !formData.password ||
-      !formData.confirmPassword
-    ) {
-
-      setMessage("Please fill in all fields.");
-
-      return;
-    }
-
-
-    if (formData.mobile.length !== 10) {
-
-      setMessage("Mobile number must contain 10 digits.");
-
-      return;
-    }
-
-
-    if (formData.password !== formData.confirmPassword) {
-
-      setMessage("Passwords do not match.");
-
-      return;
-    }
-
-
-    setMessage("Registration successful! 🎉");
-
-    setTimeout(() => {
-
-      navigate("/login");
-
-    }, 1200);
-
-  };
-
 
   return (
+    <section className="auth-section">
+      <div className="auth-card">
+        <span>Join Foodie</span>
+        <h1>Create Account</h1>
 
-    <div className="auth-page">
+        <form onSubmit={handleSubmit}>
+          <label>Name</label>
+          <input
+            type="text"
+            placeholder="Enter name"
+            value={form.name}
+            onChange={(e) =>
+              setForm({
+                ...form,
+                name: e.target.value
+              })
+            }
+          />
 
-      <div className="auth-container register-container">
+          <label>Email</label>
+          <input
+            type="email"
+            placeholder="Enter email"
+            value={form.email}
+            onChange={(e) =>
+              setForm({
+                ...form,
+                email: e.target.value
+              })
+            }
+          />
 
+          <label>Password</label>
+          <input
+            type="password"
+            placeholder="Create password"
+            value={form.password}
+            onChange={(e) =>
+              setForm({
+                ...form,
+                password: e.target.value
+              })
+            }
+          />
 
-        <div className="auth-left">
+          <button className="primary-btn full">Register</button>
+        </form>
 
-          <div className="auth-logo">
-            🍔
-          </div>
-
-          <h1>
-            Join Foodie!
-          </h1>
-
-          <p>
-            Create an account and discover
-            delicious food around you.
-          </p>
-
-          <div className="auth-food">
-            🍕 🍔 🍜 🍰
-          </div>
-
-        </div>
-
-
-        <div className="auth-form-container">
-
-          <h2>
-            Create Account
-          </h2>
-
-          <p className="form-subtitle">
-            Fill in your details to get started.
-          </p>
-
-
-          {message && (
-
-            <div className="message">
-              {message}
-            </div>
-
-          )}
-
-
-          <form onSubmit={handleSubmit}>
-
-
-            <div className="input-group">
-
-              <label>
-                Full Name
-              </label>
-
-              <input
-                type="text"
-                name="name"
-                placeholder="Enter your full name"
-                value={formData.name}
-                onChange={handleChange}
-              />
-
-            </div>
-
-
-            <div className="input-group">
-
-              <label>
-                Email Address
-              </label>
-
-              <input
-                type="email"
-                name="email"
-                placeholder="Enter your email"
-                value={formData.email}
-                onChange={handleChange}
-              />
-
-            </div>
-
-
-            <div className="input-group">
-
-              <label>
-                Mobile Number
-              </label>
-
-              <input
-                type="tel"
-                name="mobile"
-                placeholder="Enter 10 digit mobile number"
-                maxLength="10"
-                value={formData.mobile}
-                onChange={(event) => {
-
-                  const value = event.target.value.replace(
-                    /\D/g,
-                    ""
-                  );
-
-                  setFormData({
-                    ...formData,
-                    mobile: value,
-                  });
-
-                }}
-              />
-
-            </div>
-
-
-            <div className="input-group">
-
-              <label>
-                Password
-              </label>
-
-              <input
-                type="password"
-                name="password"
-                placeholder="Create a password"
-                value={formData.password}
-                onChange={handleChange}
-              />
-
-            </div>
-
-
-            <div className="input-group">
-
-              <label>
-                Confirm Password
-              </label>
-
-              <input
-                type="password"
-                name="confirmPassword"
-                placeholder="Confirm your password"
-                value={formData.confirmPassword}
-                onChange={handleChange}
-              />
-
-            </div>
-
-
-            <button
-              type="submit"
-              className="auth-btn"
-            >
-              Create Account
-            </button>
-
-
-          </form>
-
-
-          <p className="account-text">
-
-            Already have an account?
-
-            <Link to="/login">
-              Login
-            </Link>
-
-          </p>
-
-        </div>
-
+        <p>
+          Already have an account? <Link to="/login">Login</Link>
+        </p>
       </div>
-
-    </div>
-
+    </section>
   );
-}
+};
 
 export default Register;
