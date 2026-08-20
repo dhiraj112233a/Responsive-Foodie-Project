@@ -1306,6 +1306,8 @@ textarea {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  color: #111827;
 }
 
 .contact-info p {
