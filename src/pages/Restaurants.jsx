@@ -14,13 +14,13 @@ const Restaurants = () => {
     // Check if user is searching a rating like 4.5+
     let ratingFromSearch = null;
 
-    if (searchValue === "4.5+") {
+    if (searchValue === "4.5") {
       ratingFromSearch = 4.5;
-    } else if (searchValue === "4+") {
+    } else if (searchValue === "4") {
       ratingFromSearch = 4;
-    } else if (searchValue === "3.5+") {
+    } else if (searchValue === "3.5") {
       ratingFromSearch = 3.5;
-    } else if (searchValue === "3+") {
+    } else if (searchValue === "3") {
       ratingFromSearch = 3;
     }
 
