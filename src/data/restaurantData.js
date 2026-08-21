@@ -95,7 +95,7 @@ export const restaurants = [
  {
    id: "r8",
    name: "Brew & Bliss",
-   image: restaurant7,
+   image: restaurant8,
    cuisine: "Italian, Pasta, Coffee",
    rating: 3.3,
    deliveryTime: "15-25 min",

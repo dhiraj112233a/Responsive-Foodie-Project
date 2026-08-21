@@ -3,7 +3,7 @@ import SearchBar from "../components/SearchBar";
 import RestaurantCard from "../components/RestaurantCard";
 import { restaurants } from "../data/restaurantData";
 
-const Restaurants = () => {
+function Restaurants() {
   const [search, setSearch] = useState("");
   const [rating, setRating] = useState("all");
 
@@ -25,22 +25,19 @@ const Restaurants = () => {
     }
 
     // Normal restaurant/cuisine search
-    const matchesSearch =
-      restaurant.name
-        .toLowerCase()
-        .includes(searchValue) ||
+    const matchesSearch = restaurant.name
+      .toLowerCase()
+      .includes(searchValue) ||
       restaurant.cuisine
         .toLowerCase()
         .includes(searchValue);
 
     // Dropdown rating filter
-    const matchesDropdownRating =
-      rating === "all" ||
+    const matchesDropdownRating = rating === "all" ||
       Number(restaurant.rating) >= Number(rating);
 
     // Typed rating search
-    const matchesTypedRating =
-      ratingFromSearch === null ||
+    const matchesTypedRating = ratingFromSearch === null ||
       Number(restaurant.rating) >= ratingFromSearch;
 
     // If searching rating, ignore normal text search
@@ -74,8 +71,7 @@ const Restaurants = () => {
             onChange={setSearch}
             rating={rating}
             onRatingChange={setRating}
-            placeholder="Search restaurants or cuisine..."
-          />
+            placeholder="Search restaurants or cuisine..." />
 
         </div>
 
@@ -88,8 +84,7 @@ const Restaurants = () => {
 
               <RestaurantCard
                 key={restaurant.id}
-                restaurant={restaurant}
-              />
+                restaurant={restaurant} />
 
             ))
 
@@ -97,10 +92,10 @@ const Restaurants = () => {
 
             <div className="no-results">
 
-              <h2>😕 No restaurants found</h2>
+              <h2>😕 Oops No restaurants found</h2>
 
               <p>
-                Try another restaurant, cuisine or rating.
+                Please Try another restaurant, cuisine or rating.
               </p>
 
             </div>
@@ -113,6 +108,6 @@ const Restaurants = () => {
 
     </section>
   );
-};
+}
 
 export default Restaurants;
