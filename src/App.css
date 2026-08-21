@@ -32,8 +32,10 @@
 
 .brand span {
   background: linear-gradient(135deg, var(--primary), #ff9b38);
+  background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
+  -webkit-text-fill-color: transparent;
 }
 
 .nav-links {
