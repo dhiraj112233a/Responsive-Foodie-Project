@@ -44,7 +44,7 @@ const RestaurantDetails = () => {
         <div className="section-heading compact">
           <div>
             <span>Restaurant Menu</span>
-            <h2>Recommended Dishes</h2>
+            <h2> Must Try</h2>
           </div>
         </div>
 

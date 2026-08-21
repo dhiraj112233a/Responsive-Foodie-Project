@@ -1,157 +1,67 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { foods, restaurants } from "../data/foodData";
-import FoodCard from "../components/FoodCard";
-
-function Search({ addToCart }) {
-
-  const [search, setSearch] = useState("");
-
-  const searchText = search.toLowerCase();
-
-  const filteredFoods = foods.filter(
-    (food) =>
-      food.name.toLowerCase().includes(searchText) ||
-      food.category.toLowerCase().includes(searchText) ||
-      food.restaurant.toLowerCase().includes(searchText) ||
-      food.type.toLowerCase().includes(searchText)
-  );
-
-  const filteredRestaurants = restaurants.filter(
-    (restaurant) =>
-      restaurant.name.toLowerCase().includes(searchText) ||
-      restaurant.cuisine.toLowerCase().includes(searchText)
-  );
+const SearchBar = ({
+  value,
+  onChange,
+  rating,
+  onRatingChange,
+  placeholder = "Search food..."
+}) => {
 
   return (
-    <div className="page">
+    <div className="search-container">
 
-      <div className="search-page">
+      {/* Search */}
+      <div className="search-box">
 
-        <h1>Search Food & Drinks 🔍</h1>
+        <span>🔍</span>
 
-        <div className="large-search">
+        <input
+          type="text"
+          value={value}
+          placeholder={placeholder}
+          onChange={(e) =>
+            onChange(e.target.value)
+          }
+        />
 
-          <span>🔍</span>
+      </div>
 
-          <input
-            type="text"
-            placeholder="Search food, drinks or restaurants..."
-            value={search}
-            onChange={(e) =>
-              setSearch(e.target.value)
-            }
-            autoFocus
-          />
 
-          {search && (
-            <button
-              onClick={() => setSearch("")}
-            >
-              ✖
-            </button>
-          )}
+      {/* Rating Filter */}
+      <div className="rating-filter">
 
-        </div>
+        <select
+          value={rating}
+          onChange={(e) =>
+            onRatingChange(e.target.value)
+          }
+        >
 
-        {!search ? (
-          <div className="search-placeholder">
-            <div>🍕</div>
+          <option value="all">
+            ⭐ All Ratings
+          </option>
 
-            <h2>
-              What are you craving?
-            </h2>
+          <option value="4.5">
+            ⭐ 4.5+
+          </option>
 
-            <p>
-              Search for your favorite food,
-              drinks or restaurants.
-            </p>
-          </div>
-        ) : (
-          <>
+          <option value="4">
+            ⭐ 4.0+
+          </option>
 
-            <h2 className="result-title">
-              Search Results
-            </h2>
+          <option value="3.5">
+            ⭐ 3.5+
+          </option>
 
-            {filteredRestaurants.length > 0 && (
-              <section className="search-section">
+          <option value="3">
+            ⭐ 3.0+
+          </option>
 
-                <h3>Restaurants</h3>
-
-                <div className="search-restaurants">
-
-                  {filteredRestaurants.map(
-                    (restaurant) => (
-                      <Link
-                        key={restaurant.id}
-                        to={`/restaurants/${restaurant.id}`}
-                        className="search-restaurant"
-                      >
-                        <img
-                          src={restaurant.image}
-                          alt={restaurant.name}
-                        />
-
-                        <div>
-                          <h4>
-                            {restaurant.name}
-                          </h4>
-
-                          <p>
-                            {restaurant.cuisine}
-                          </p>
-                        </div>
-                      </Link>
-                    )
-                  )}
-
-                </div>
-
-              </section>
-            )}
-
-            <section className="search-section">
-
-              <h3>
-                Food & Drinks ({filteredFoods.length})
-              </h3>
-
-              {filteredFoods.length > 0 ? (
-
-                <div className="food-grid">
-
-                  {filteredFoods.map((food) => (
-                    <FoodCard
-                      key={food.id}
-                      food={food}
-                      addToCart={addToCart}
-                    />
-                  ))}
-
-                </div>
-
-              ) : (
-                <div className="no-results">
-                  😔
-                  <h3>
-                    No food found
-                  </h3>
-                  <p>
-                    Try searching something else.
-                  </p>
-                </div>
-              )}
-
-            </section>
-
-          </>
-        )}
+        </select>
 
       </div>
 
     </div>
   );
-}
+};
 
-export default Search;
+export default SearchBar;

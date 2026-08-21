@@ -8,6 +8,7 @@ const SearchBar = ({ value, onChange, placeholder = "Search food..." }) => {
         placeholder={placeholder}
         onChange={(e) => onChange(e.target.value)}
       />
+      
     </div>
   );
 };

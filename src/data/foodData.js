@@ -54,6 +54,14 @@ import mangoShake from "../assets/drinks/mango-shake.jpg";
 import strawberryShake from "../assets/drinks/strawberry-shake.jpg";
 import orangeJuice from "../assets/drinks/orange-juice.jpg";
 
+import alfredoPasta from "../assets/pasta/alfredo-pasta.jpg";
+import arrabbiataPasta from "../assets/pasta/arrabbiata-pasta.jpg";
+import pinkSaucePasta from "../assets/pasta/pink-sauce-pasta.jpg";
+import chickenAlfredoPasta from "../assets/pasta/chicken-alfredo-pasta.jpg";
+import macaroniPasta from "../assets/pasta/macaroni-pasta.jpg";
+import pestoPasta from "../assets/pasta/pesto-pasta.jpg";
+import chickenArrabbiata from "../assets/pasta/chicken-arrabbiata.jpg";
+
 export const foods = [
   {
     id: 1,
@@ -599,5 +607,88 @@ export const foods = [
     restaurantId: "r3",
     type: "veg",
     description: "Freshly squeezed orange juice."
-  }
+  },
+  {
+  id: 50,
+  name: "Creamy Alfredo Pasta",
+  category: "pasta",
+  image: alfredoPasta,
+  price: 249,
+  rating: 4.6,
+  restaurantId: "r1",
+  type: "veg",
+  description: "Creamy white sauce pasta with herbs and parmesan."
+},
+
+{
+  id: 51,
+  name: "Arrabbiata Pasta",
+  category: "pasta",
+  image: arrabbiataPasta,
+  price: 229,
+  rating: 4.5,
+  restaurantId: "r2",
+  type: "veg",
+  description: "Spicy tomato pasta tossed with garlic and Italian herbs."
+},
+
+{
+  id: 52,
+  name: "Penne Pink Sauce",
+  category: "pasta",
+  image: pinkSaucePasta,
+  price: 259,
+  rating: 4.7,
+  restaurantId: "r3",
+  type: "veg",
+  description: "Delicious penne pasta cooked in a creamy pink tomato sauce."
+},
+
+{
+  id: 53,
+  name: "Chicken Alfredo Pasta",
+  category: "pasta",
+  image: chickenAlfredoPasta,
+  price: 329,
+  rating: 4.7,
+  restaurantId: "r4",
+  type: "non-veg",
+  description: "Creamy Alfredo pasta topped with juicy grilled chicken."
+},
+
+{
+  id: 54,
+  name: "Cheesy Macaroni Pasta",
+  category: "pasta",
+  image: macaroniPasta,
+  price: 239,
+  rating: 4.4,
+  restaurantId: "r1",
+  type: "veg",
+  description: "Soft macaroni pasta loaded with creamy melted cheese."
+},
+
+{
+  id: 55,
+  name: "Pesto Pasta",
+  category: "pasta",
+  image: pestoPasta,
+  price: 279,
+  rating: 4.6,
+  restaurantId: "r5",
+  type: "veg",
+  description: "Fresh pasta tossed with basil pesto, herbs and parmesan."
+},
+
+{
+  id: 56,
+  name: "Chicken Arrabbiata Pasta",
+  category: "pasta",
+  image: chickenArrabbiata,
+  price: 349,
+  rating: 4.8,
+  restaurantId: "r2",
+  type: "non-veg",
+  description: "Spicy tomato pasta served with tender chicken pieces."
+}
 ];

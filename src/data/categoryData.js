@@ -5,6 +5,8 @@ import coffeeImg from "../assets/coffee/cappuccino.jpg";
 import chineseImg from "../assets/chinese/noodles.jpg";
 import dessertImg from "../assets/desserts/chocolate-cake.jpg";
 import drinksImg from "../assets/drinks/mojito.jpg";
+import pastaImg from "../assets/pasta/chicken-alfredo-pasta.jpg";
+
 
 export const categories = [
   {
@@ -56,4 +58,12 @@ export const categories = [
     description: "Refreshing shakes and beverages",
     items: 7
   },
+  {
+    id: "pasta",
+    name: "Pasta",
+    image: pastaImg,
+    description: "Creamy, cheesy and delicious pasta",
+    items: 7
+  },
+
 ];
